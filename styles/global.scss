@@ -1,0 +1,17 @@
+@import 'common';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  align-items: center;
+  background: $color_background;
+  font-family: Montserrat, sans-serif;
+}

@@ -1,0 +1,11 @@
+.table {
+  flex-direction: column;
+
+  .table-label {
+    flex: 1;
+  }
+
+  .table-value {
+    flex: 1;
+  }
+}

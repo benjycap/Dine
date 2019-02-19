@@ -1,6 +1,6 @@
 const passport = require('passport');
 const { Strategy: LocalStrategy } = require('passport-local')
-const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt')
+const { Strategy: JwtStrategy } = require('passport-jwt')
 const Users = require('../models/userModel');
 const roles = require('../enum/roles');
 
@@ -35,7 +35,7 @@ passport.use('login', new LocalStrategy({ session: false },
 }));
 
 passport.use(new JwtStrategy({
-  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  jwtFromRequest: (req) => req && req.cookies ? req.cookies.jwt : null,
   secretOrKey: 'big_secret_key'
 }, async (payload, done) => {
   try {

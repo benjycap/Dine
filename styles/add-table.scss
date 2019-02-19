@@ -1,0 +1,51 @@
+@import 'common';
+
+.add-table {
+  flex-direction: column;
+  >*:not(:last-child) {
+    margin-bottom: 50px;
+  } 
+
+  .add-table-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+    font-size: 22px;
+    font-weight: bold;
+  }
+
+  input {
+    align-self: center;
+    width: 40%;
+    height: 30px;
+    font-size: 18px;
+    min-width: $card-content-min-width;
+    text-align: center;
+    border-radius: 20px;
+    padding-left: 20px;
+    margin: 0 auto;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .add-table-submit {
+    font-size: 22px;
+    align-self: center;
+    box-shadow: $shadow;
+    width: 100px;
+    height: 30px;
+    outline: none;
+    border-radius: 20px;
+    border-color: $color-primary;
+    background-color: white;
+  
+  
+    &:active {
+      color: white;
+      background-color: $color_primary;
+    }
+  }
+}

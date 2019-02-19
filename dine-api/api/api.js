@@ -4,11 +4,15 @@ const Tables = require('../models/tableModel');
 const roles = require('../enum/roles');
 
 async function getTablesForRestaurant(user) {
-  return Restaurants.findOne({ user: user._id }, ['tables']).populate('tables');
+  const restaurant = await Restaurants.findOne({ user: user._id }, ['name', 'tables']).populate('tables');
+  return restaurant.toJSON().tables.map(table => ({ ...table, name: restaurant.name }));
 }
 
 async function getAllTables() {
-  return Restaurants.find({}, ['name', 'tables']).populate('tables');
+  const restaurants = await Restaurants.find({}, ['name', 'tables']).populate('tables');
+  return restaurants.reduce((acc, restaurant) => {
+    return [ ...acc, ...restaurant.tables.map(table => ({ ...table, name: restaurant.name })) ];
+  }, [])
 }
 
 async function getTableForCustomer(user) {
@@ -22,7 +26,7 @@ async function getTableById(user, tableId) {
 }
 
 async function createTable(user, tableData) {
-  const restaurant = await Restaurants.findOne({ user: user.pull_id });
+  const restaurant = await Restaurants.findOne({ user: user._id });
   const newTable = await Tables.create(tableData);
   restaurant.tables.push(newTable);
   await restaurant.save();
